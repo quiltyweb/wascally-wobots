@@ -91,3 +91,25 @@ If they don't match, you'll see one of these:
 ### Go notes
 
 `server/go.mod` needs Go 1.27.1, because nakama-common v1.48.0 requires it. With a Go 1.26 host, `make test` downloads Go 1.27.1 on first run (`GOTOOLCHAIN=auto`, the default). The plugin build itself always runs in the builder image, so the host Go version doesn't affect it.
+
+## Client
+
+The Godot project is in `client/`. It uses the Mobile renderer, since mobile is the eventual target, but runs on desktop for now. It uses the official Nakama Godot addon **v3.4.0** (`nakama-3.4.0.zip` from the [nakama-godot releases](https://github.com/heroiclabs/nakama-godot/releases)), installed in `client/addons/com.heroiclabs.nakama/`. The addon has no editor plugin to enable; its `Nakama.gd` is registered as the `Nakama` autoload in `project.godot`, as the addon's README instructs.
+
+Run it with the server up:
+
+```sh
+godot --path client          # or open client/project.godot in the editor and press Play
+```
+
+The window shows "Connecting…" and then `Hello, <user id>`, or an error if the server can't be reached. The `Net` autoload (`client/autoload/net.gd`) handles the whole flow:
+
+1. Reads its connection settings from one `CONFIG` dictionary.
+2. Creates a device ID on first launch and stores it in `user://device_id`. On macOS that's `~/Library/Application Support/Godot/app_userdata/Wascally Wobots/`.
+3. Authenticates anonymously with that ID.
+4. Opens the socket.
+5. Calls `hello`.
+
+The device's user appears under **Accounts** in the console.
+
+Static type hints are required: `debug/gdscript/warnings/untyped_declaration` is set to warn. The addon is excluded from these warnings.

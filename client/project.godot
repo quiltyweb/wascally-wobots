@@ -1,0 +1,29 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Wascally Wobots"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.7", "Mobile")
+
+[autoload]
+
+Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
+Net="*res://autoload/net.gd"
+
+[debug]
+
+gdscript/warnings/exclude_addons=true
+gdscript/warnings/untyped_declaration=1
+
+[rendering]
+
+renderer/rendering_method="mobile"
