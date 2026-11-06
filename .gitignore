@@ -1,0 +1,15 @@
+# Go build output
+server/build/
+*.so
+*.test
+*.out
+
+# Godot
+.godot/
+*.import.tmp
+
+# Local environment
+.env
+
+# OS
+.DS_Store

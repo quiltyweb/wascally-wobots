@@ -1,0 +1,12 @@
+# Nakama config for local development only. Never reuse these keys elsewhere.
+name: wascally-local
+
+logger:
+  level: DEBUG
+
+socket:
+  server_key: local-server-key
+
+console:
+  username: admin
+  password: wobots-local-console
